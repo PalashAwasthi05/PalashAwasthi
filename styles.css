@@ -1,0 +1,77 @@
+:root{
+    --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#475569; --brand:#818181;
+}
+
+/* Basic reset and body styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    margin:0;
+    font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color:var(--text);
+    background:var(--bg);
+}
+
+main{ max-width:960px; margin:0 auto; padding:48px 16px; }
+a{ color:var(--brand); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+/* Hero section */
+.hero{
+    display:flex; flex-direction:column; align-items:center; padding:24px 0;
+}
+
+.avatar{
+    width:104px; height:104px; border-radius:999px; object-fit:cover;
+    box-shadow:0 10px 24px 0 rgba(0,0,0,.08);
+}
+
+.hero h1{ margin:16px 0 8px; font-size:32px; }
+.lead { margin:0; color:var(--muted); max-width:780px; text-align:center; }
+.btn{display:inline-block; margin-top:16px; padding:12px 18px; border-radius:10px; background:var(--brand); color:#ffffff; font-weight:600;}
+
+/* Experience section */
+.experience {
+  padding: 60px 20px;
+}
+
+.experience h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #2c3e50;
+}
+
+/* one authoritative grid rule */
+.grid{
+  --card-min: 260px;
+  --gap: 24px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
+  gap: var(--gap);
+
+  /* This makes the grid a centered block instead of stretching full width */
+  max-width: calc(4 * var(--card-min) + 3 * var(--gap));  /* up to 4 columns */
+  width: 100%;
+  margin-inline: auto;               /* centers the grid container */
+}
+
+.card{
+    background:var(--card); border-radius:14px; padding:20px; box-shadow:0 10px 24px 0 rgba(0,0,0,.06);
+}
+
+.card h3{ margin:8px 0 6px;}
+.card p{ margin:0; color:var(--muted); }
+
+.footer{ text-align:center; color:var(--muted); padding:32px 0; border-top:1px solid #e2e8f0; margin-top:40px; }
+
+@media (max-width:900px){ .grid{ max-width: calc(2 * var(--card-min) + var(--gap)); } }
+@media (max-width:520px){
+  .grid{ max-width: var(--card-min); }
+  .hero h1{ font-size:28px; }
+}
