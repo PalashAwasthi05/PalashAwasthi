@@ -1,0 +1,41 @@
+---
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+  date: Date;
+  readingTime?: string;
+  tags?: string[];
+}
+
+const { date, readingTime, tags = [] } = Astro.props;
+---
+
+<div class="post-meta meta">
+  <FormattedDate date={date} />
+  {readingTime && <><span class="post-meta__sep" aria-hidden="true">·</span><span>{readingTime}</span></>}
+  {
+    tags.length > 0 && (
+      <>
+        <span class="post-meta__sep" aria-hidden="true">·</span>
+        <span class="post-meta__tags">
+          {tags.map((t) => (
+            <span class="post-meta__tag">#{t}</span>
+          ))}
+        </span>
+      </>
+    )
+  }
+</div>
+
+<style>
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .post-meta :global(time) { text-transform: uppercase; }
+  .post-meta__sep { color: var(--ink-faint); }
+  .post-meta__tags { display: inline-flex; gap: 0.6rem; flex-wrap: wrap; }
+  .post-meta__tag { color: var(--ink-muted); }
+</style>

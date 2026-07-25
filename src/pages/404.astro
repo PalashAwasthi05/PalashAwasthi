@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../lib/site';
+---
+
+<BaseLayout title={`Not found — ${site.name}`} description="Page not found.">
+  <section class="notfound">
+    <h1 class="display">Page not found</h1>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    padding-block: clamp(2rem, 8vw, 5rem);
+  }
+</style>

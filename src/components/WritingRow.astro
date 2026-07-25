@@ -1,0 +1,40 @@
+---
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+  date: Date;
+  title: string;
+  href: string;
+  description?: string;
+  /** Catalog index, e.g. "00". */
+  number?: string;
+  /** Stagger group for the scroll-reveal. */
+  revealGroup?: string;
+}
+
+const { date, title, href, description, number, revealGroup = 'rows' } =
+  Astro.props;
+---
+
+<article class="row row--link" data-reveal data-reveal-group={revealGroup}>
+  <FormattedDate date={date} class="row__date" />
+  <div class="row__body">
+    {number !== undefined && <span class="row__number">{number}</span>}
+    <a href={href}>
+      <h2 class="row__title">{title}</h2>
+    </a>
+    {description && <p class="row__desc">{description}</p>}
+  </div>
+</article>
+
+<style>
+  .row__number {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    font-feature-settings: 'tnum' 1;
+  }
+</style>

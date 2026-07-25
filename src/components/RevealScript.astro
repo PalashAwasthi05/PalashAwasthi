@@ -1,0 +1,43 @@
+---
+// Scroll-in reveal. Hidden state is gated behind html.js (see global.css), so
+// content is always visible if JS is off or fails. Fully honors reduced motion.
+---
+
+<script>
+  function initReveal() {
+    const els = document.querySelectorAll<HTMLElement>(
+      '[data-reveal]:not(.is-visible)',
+    );
+    if (!els.length) return;
+
+    // Reduced motion: reveal instantly, never observe or animate.
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
+    // Stagger within a logical group (e.g. a list of rows).
+    const counters = new Map<string, number>();
+    els.forEach((el) => {
+      const group = el.dataset.revealGroup ?? '_';
+      const i = counters.get(group) ?? 0;
+      el.style.setProperty('--reveal-delay', `${Math.min(i, 8) * 40}ms`);
+      counters.set(group, i + 1);
+    });
+
+    const io = new IntersectionObserver(
+      (entries, obs) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target); // one-shot
+          }
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.1 },
+    );
+    els.forEach((el) => io.observe(el));
+  }
+
+  initReveal();
+</script>
