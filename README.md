@@ -137,9 +137,41 @@ The two above-the-fold faces (400 + 600) are copied to `public/fonts/` by
 
 ## Deploying
 
-Static output in `dist/`. Deploy to Vercel, Netlify, or Cloudflare Pages with
-build command `bun --bun run build` and output directory `dist`. Set the `site`
-origin in `astro.config.mjs` first.
+Live at **https://www.palashawasthi.com** via GitHub Pages on
+`PalashAwasthi05/PalashAwasthi`:
+
+- **`main`** holds the source (this project).
+- **`gh-pages`** holds the built `dist/`, and is what Pages serves (branch `/`,
+  custom domain from `CNAME`). Pages rebuilds automatically on push to it.
+
+To ship a change:
+
+```sh
+bun run deploy      # builds, then force-pushes dist/ to gh-pages
+```
+
+Two files must survive into `dist/` or the site breaks — `scripts/deploy.sh`
+aborts if either is missing:
+
+- **`.nojekyll`** — without it Pages runs Jekyll, which silently drops
+  `_astro/` (underscore-prefixed), killing all CSS, JS, fonts, and images.
+- **`CNAME`** — without it the custom domain reverts to `github.io`.
+
+Both live in `public/`, so the build copies them automatically.
+
+### Optional: automate with GitHub Actions
+
+`.github/workflows/deploy.yml` exists locally but is **not committed** — the
+`gh` token here lacked the `workflow` scope, so pushing it was rejected. To
+switch to CI deploys, grant the scope from an interactive terminal:
+
+```sh
+gh auth refresh -h github.com -s workflow
+git add .github && git commit -m "Add Pages deploy workflow" && git push
+```
+
+Then set Pages source to "GitHub Actions" (repo Settings → Pages), and every
+push to `main` builds and deploys on its own — no more `bun run deploy`.
 
 ## Layout
 

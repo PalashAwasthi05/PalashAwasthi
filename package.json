@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "sync": "astro sync"
+    "sync": "astro sync",
+    "deploy": "bash ./scripts/deploy.sh"
   },
   "dependencies": {
     "@astrojs/mdx": "7.0.0",
