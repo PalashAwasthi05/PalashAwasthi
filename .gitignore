@@ -11,3 +11,8 @@ public/fonts/
 *.log
 .vercel/
 .netlify/
+
+# Pages deploy workflow — kept local until the gh token has the `workflow`
+# scope (`gh auth refresh -h github.com -s workflow`), otherwise pushes are
+# rejected. Remove this line to commit it. See DEVELOPING.md.
+.github/workflows/
