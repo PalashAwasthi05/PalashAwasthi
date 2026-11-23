@@ -5,11 +5,7 @@ import { renderOg } from '../../og/render';
 export const prerender = true;
 
 export const GET: APIRoute = async () => {
-  const png = await renderOg({
-    eyebrow: site.role,
-    title: site.name,
-    description: site.tagline,
-  });
+  const png = await renderOg(site.name);
   return new Response(png as BodyInit, {
     headers: {
       'Content-Type': 'image/png',

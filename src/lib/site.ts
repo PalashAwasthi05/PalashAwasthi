@@ -6,11 +6,11 @@ export const site = {
   /** Author / site name, shown in the hero and footer. */
   name: 'Palash Awasthi',
 
-  /** Opening line of the bio — also the meta description and OG subtitle. */
+  /** Opening line of the bio — also the homepage meta description. */
   tagline:
     "Hi, I'm Palash! I love questioning how humans will exist in the future.",
 
-  /** Current primary role — the small mono eyebrow on share images. */
+  /** Current primary role — available for profile copy. */
   role: 'Head of Growth · Reflex',
 
   /** Used as the default <meta name="description">. */
@@ -18,7 +18,7 @@ export const site = {
     "Palash Awasthi — Head of Growth at Reflex. I love questioning how humans will exist in the future.",
 
   links: {
-    email: 'palash@reflex.dev',
+    email: 'palash.awasthi@outlook.com',
     x: 'https://x.com/palashaw_',
     linkedin: 'https://www.linkedin.com/in/palash-awasthi/',
     spotify:

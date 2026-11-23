@@ -79,17 +79,8 @@ Share images are generated **at build time** with `satori` + `@resvg/resvg-wasm`
 - Endpoint: `src/pages/og/default.png.ts`
 - Layout/colors: `src/og/render.ts`
 
-satori reads **TTF/OTF/WOFF but never `woff2`**, and never variable fonts.
-Akatab ships a `.woff` per weight, so `render.ts` reads those straight out of
-`node_modules` — nothing to generate. Geist Mono is variable-woff2 only, so its
-metadata face stays a committed static TTF in `src/og/fonts/`. To regenerate it
-(needs `fonttools`):
-
-```sh
-fonttools ttLib.woff2 decompress \
-  node_modules/@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2 -o /tmp/gm.ttf
-fonttools varLib.instancer /tmp/gm.ttf wght=500 -o src/og/fonts/GeistMono-Meta.ttf
-```
+Satori renders the name in Akatab 600, the same face and weight as the homepage heading.
+It loads the static WOFF from Fontsource at build time.
 
 ## The photo
 
