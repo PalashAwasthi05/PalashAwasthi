@@ -22,10 +22,9 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = new URL(ogImage, Astro.site);
 const showShareDescription = Astro.url.pathname !== '/';
-const [favicon, touchIcon] = await Promise.all([
-  getImage({ src: photo, width: 32, height: 32, format: 'png', fit: 'cover' }),
-  getImage({ src: photo, width: 180, height: 180, format: 'png', fit: 'cover' }),
-]);
+const touchIcon = await getImage({
+  src: photo, width: 180, height: 180, format: 'png', fit: 'cover',
+});
 ---
 
 {/* Flag JS availability before paint so scroll-reveal can hide-then-reveal
@@ -65,5 +64,5 @@ const [favicon, touchIcon] = await Promise.all([
 <meta name="twitter:image" content={ogImageUrl} />
 
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link rel="icon" href={favicon.src} type="image/png" sizes="32x32" />
+<link rel="icon" href="/favicon-transparent.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href={touchIcon.src} sizes="180x180" />
